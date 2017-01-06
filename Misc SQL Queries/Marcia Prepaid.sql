@@ -1,0 +1,53 @@
+declare @Start_Date date
+declare @End_Date date
+
+Set @Start_Date = '2015-12-1'
+Set @End_Date = '2015-12-1'
+
+----SELECT     ID, FIRST_NAME, LAST_NAME, COMPANY, SOURCE_SYSTEM, 
+----                      TRANSACTION_DATE, DESCRIPTION, PRODUCT_CODE, GL_ACCOUNT, INVOICE_CHARGES, 
+--                      --AMOUNT, CHECK_NUMBER, CC_NUMBER, CC_AUTHORIZE, BATCH_NUM
+--SELECT t.*--t.TRANS_NUMBER, t.invoice_reference_num, t.LINE_NUMBER, t.TRANSACTION_DATE, t.TRANSACTION_TYPE, t.AMOUNT, t.GL_ACCOUNT--, t2.GL_ACCOUNT, t2.TRANSACTION_DATE, t2.TRANSACTION_TYPE, t2.AMOUNT
+--	FROM Trans t
+--	inner join Name n ON t.BT_ID = n.ID
+--	--inner join (select t2.INVOICE_REFERENCE_NUM, t2.GL_ACCOUNT, t2.TRANSACTION_TYPE, t2.AMOUNT, t2.TRANSACTION_DATE
+--				--from trans t2
+--				--where t2.TRANSACTION_TYPE = 'DIST') t2 on t.INVOICE_REFERENCE_NUM = t2.INVOICE_REFERENCE_NUM
+--	--inner join trans t2 on t.INVOICE_REFERENCE_NUM = t2.INVOICE_REFERENCE_NUM and t2.TRANSACTION_TYPE = 'DIST'
+--where t.INVOICE_REFERENCE_NUM = 2055194
+--	--and t.GL_ACCOUNT LIKE '1400-0000-00-0'
+----WHERE t.GL_ACCOUNT LIKE '1400-0000-00-0' 
+----		AND t.TRANSACTION_DATE >= @Start_Date 
+----		AND t.TRANSACTION_DATE <=  @End_Date 
+----		AND (t.TRANSACTION_TYPE <> 'pay')
+----		--and  t.INVOICE_REFERENCE_NUM = 1942608
+----ORDER BY t.TRANSACTION_DATE
+
+--select t.TRANS_NUMBER, t.SOURCE_SYSTEM, t.INVOICE_REFERENCE_NUM, t.LINE_NUMBER, t.TRANSACTION_DATE, t.TRANSACTION_TYPE, t.AMOUNT, t.GL_ACCOUNT
+--from trans t
+--where GL_ACCOUNT = '1400-0000-00-0'
+--	and SOURCE_SYSTEM = 'SC'
+--	and t.TRANSACTION_DATE >= @Start_Date 
+--	and t.TRANSACTION_DATE <=  @End_Date 
+--	and (t.TRANSACTION_TYPE <> 'pay')
+--ORDER BY t.TRANSACTION_DATE
+
+--select distinct t.INVOICE_REFERENCE_NUM
+--from trans t
+--where GL_ACCOUNT = '1400-0000-00-0'
+--	and SOURCE_SYSTEM = 'SC'
+--	and t.TRANSACTION_DATE >= @Start_Date 
+--	and t.TRANSACTION_DATE <=  @End_Date 
+--	and (t.TRANSACTION_TYPE <> 'pay')
+
+select *      
+from trans t
+where GL_ACCOUNT = '1400-0000-00-0'
+	and t.INVOICE_REFERENCE_NUM = '2025552'
+	--and t.TRANSACTION_DATE >= @Start_Date 
+	--and t.TRANSACTION_DATE <=  @End_Date 
+	and (t.TRANSACTION_TYPE <> 'pay')
+
+--select top 1 t2.TRANS_NUMBER, t2.invoice_reference_num, t2.LINE_NUMBER, t2.TRANSACTION_DATE, t2.TRANSACTION_TYPE, t2.AMOUNT, t2.GL_ACCOUNT
+--from trans t2
+--where t2.INVOICE_REFERENCE_NUM = 2055194

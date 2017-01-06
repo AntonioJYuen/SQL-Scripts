@@ -1,0 +1,6 @@
+select * from ICSC_Monthly_KIA_Capture_Current_Members
+select * from ICSC_Monthly_KIA_Capture_Current_Prim_Members
+select * from ICSC_Monthly_KIA_Capture_New_Members
+select * from ICSC_Monthly_KIA_Capture_Rejoined_Members
+select * from ICSC_Monthly_KIA_Capture_Renewed_Members
+select * from ICSC_Monthly_KIA_Capture_Suspended_Members
