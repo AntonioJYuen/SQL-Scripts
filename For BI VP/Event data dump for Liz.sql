@@ -3,6 +3,7 @@ select n.ID, replace(n.FIRST_NAME, ',', '') FIRST_NAME, replace(n.LAST_NAME, ','
 	, mm.MEETING, case when u.ICSC_USA_REGION is not null then u.ICSC_USA_REGION when r.ICSC_REGION is not null then r.ICSC_REGION else '~Missing Region Data' end Meeting_Region, mm.BEGIN_DATE Meeting_Date
 	, mm.MEETING_TYPE
 	, case when a.Meeting_Text is null then 1 else 0 end First_Time
+	, o.TOTAL_PAYMENTS
 from name n
 	inner join Demographics d on n.id = d.id
 	inner join orders o on n.id = o.st_Id
