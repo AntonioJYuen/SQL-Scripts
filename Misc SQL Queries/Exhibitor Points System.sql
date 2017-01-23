@@ -1,4 +1,5 @@
-drop table #TempTable
+if OBJECT_ID('tempdb..#TempTable') is not null
+drop table #TempTable;
 
 select id, company, Yr into #TempTable
 from(
