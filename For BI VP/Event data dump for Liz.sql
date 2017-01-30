@@ -3,7 +3,7 @@ select n.ID, replace(n.FIRST_NAME, ',', '') FIRST_NAME, replace(n.LAST_NAME, ','
 	, mm.MEETING, case when u.ICSC_USA_REGION is not null then u.ICSC_USA_REGION when r.ICSC_REGION is not null then r.ICSC_REGION else '~Missing Region Data' end Meeting_Region, mm.BEGIN_DATE Meeting_Date
 	, mm.MEETING_TYPE
 	, case when a.Meeting_Text is null then 1 else 0 end First_Time
-	, o.TOTAL_PAYMENTS
+	, o.TOTAL_PAYMENTS, mm.MUF_5 Budgeted_Attendance, mm.MUF_10 Budgeted_Revenue
 from name n
 	inner join Demographics d on n.id = d.id
 	inner join orders o on n.id = o.st_Id
@@ -17,4 +17,4 @@ from name n
 		on n.id = a.ST_ID and Left(SubString(mm.MEETING, PatIndex('%[0-9.-]%', mm.MEETING), 8000), PatIndex('%[^0-9.-]%', SubString(mm.MEETING, PatIndex('%[0-9.-]%', mm.MEETING), 8000) + 'X')-1) > a.Year_Attended
 			and dbo.RemoveNonAlphaCharacters(mm.MEETING)= a.Meeting_Text
 where o.STATUS not in ('CT','C')
-	and (o.ORDER_DATE >= '2014-1-1'	and o.ORDER_DATE < '2017-1-1') or (mm.BEGIN_DATE >= '2014-1-1' and mm.BEGIN_DATE < '2017-1-1')
+	and ((o.ORDER_DATE >= '2014-1-1' and o.ORDER_DATE < '2017-1-1') or (mm.BEGIN_DATE >= '2014-1-1' and mm.BEGIN_DATE < '2017-1-1'))
