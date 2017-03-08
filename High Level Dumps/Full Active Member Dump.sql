@@ -4,7 +4,7 @@ IF OBJECT_ID('tempdb..##membership_statistics') IS NOT NULL
 	 DROP TABLE ##membership_statistics
 
 select n.ID, n.CO_ID, case when n.COMPANY_RECORD = 1 then 'YES' else 'NO' end Is_Company
-	, n.FIRST_NAME, n.LAST_NAME, dbo.removebreaks(n.COMPANY) Company, n.TITLE, n.FUNCTIONAL_TITLE, n.MEMBER_TYPE, n.STATUS
+	, replace(n.FIRST_NAME,',','') FIRST_NAME, replace(n.LAST_NAME,',','') LAST_NAME, dbo.removebreaks(replace(n.COMPANY,',','')) Company, replace(n.TITLE,',','') TITLE, n.FUNCTIONAL_TITLE, n.MEMBER_TYPE, n.STATUS
 	, n.GENDER
 	, n.CITY, n.STATE_PROVINCE, n.COUNTRY
 	, n.BIRTH_DATE, n.DATE_ADDED, n.JOIN_DATE
@@ -17,7 +17,7 @@ from name n
 	inner join Demographics d on n.ID = d.ID
 	left join trans t on n.id = t.st_id
 group by n.ID, n.CO_ID, case when n.COMPANY_RECORD = 1 then 'YES' else 'NO' end
-		, n.FIRST_NAME, n.LAST_NAME, dbo.removebreaks(n.COMPANY), n.TITLE, n.FUNCTIONAL_TITLE, n.MEMBER_TYPE, n.STATUS
+		, replace(n.FIRST_NAME,',','') ,replace(n.LAST_NAME,',',''), dbo.removebreaks(replace(n.COMPANY,',','')), replace(n.TITLE,',',''), n.FUNCTIONAL_TITLE, n.MEMBER_TYPE, n.STATUS
 		, n.GENDER
 		, n.CITY, n.STATE_PROVINCE, n.COUNTRY
 		, n.BIRTH_DATE, n.DATE_ADDED, n.JOIN_DATE
